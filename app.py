@@ -1,33 +1,34 @@
 import streamlit as st
 import pickle
+import numpy as np
 import pandas as pd
+from sklearn.linear_model import LogisticRegression
 
-# Load DataFrame from pickle
+# Load dataset
 with open("df.pkl", "rb") as f:
     df = pickle.load(f)
 
-# Streamlit UI
-st.set_page_config(page_title="BMI Index Predictor", layout="centered")
+# Train model with balancing
+X = df[['Height', 'Weight']]
+y = df['Gender']
+model = LogisticRegression(class_weight="balanced")
+model.fit(X, y)
 
-st.title("👤 BMI Index Predictor")
-st.write("Enter your details to see your predicted Index (based on dataset).")
+st.set_page_config(page_title="Gender Prediction", layout="centered")
+st.title("👩‍🦰 Gender Prediction App")
+st.write("Enter height and weight to predict whether the person is male or female.")
 
-# User inputs
-gender = st.selectbox("Select Gender", df["Gender"].unique())
-height = st.number_input("Enter Height (cm)", min_value=100, max_value=250, step=1)
-weight = st.number_input("Enter Weight (kg)", min_value=30, max_value=200, step=1)
+# Inputs
+height = st.number_input("Enter Height (cm)", min_value=50.0, max_value=250.0, step=0.1)
+weight = st.number_input("Enter Weight (kg)", min_value=10.0, max_value=250.0, step=0.1)
 
-# Button for prediction
-if st.button("Predict Index"):
-    # Find closest match in dataset (simple demo logic)
-    df["distance"] = (df["Height"] - height).abs() + (df["Weight"] - weight).abs()
-    closest_row = df[df["Gender"] == gender].sort_values("distance").iloc[0]
+# Prediction
+if st.button("Predict"):
+    features = np.array([[height, weight]])
+    prediction = model.predict(features)[0]
+    proba = model.predict_proba(features)[0]
 
-    predicted_index = int(closest_row["Index"])
-
-    st.success(f"✅ Predicted Index: {predicted_index}")
-    st.write("*(Based on closest data point in dataset)*")
-
-# Show dataset preview
-st.subheader("📊 Dataset Preview")
-st.dataframe(df.head())
+    if prediction == 0:
+        st.success(f"Prediction: **Female** 👩 (Confidence: {proba[0]:.2f})")
+    else:
+        st.success(f"Prediction: **Male** 👨 (Confidence: {proba[1]:.2f})")
