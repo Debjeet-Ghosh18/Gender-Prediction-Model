@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gender Prediction App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #6dd5fa, #2980b9);
+      color: #fff;
+      text-align: center;
+      padding: 40px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(6px);
+    }
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+    button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #ffb347;
+      color: #000;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #ffcc33;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>👩‍🦰 Gender Prediction 👨</h1>
+    <form method="POST">
+      <input type="number" name="height" step="0.1" placeholder="Enter height (cm)" required /><br />
+      <input type="number" name="weight" step="0.1" placeholder="Enter weight (kg)" required /><br />
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+      <div class="result">Prediction: {{ prediction }}</div>
+    {% endif %}
+  </div>
+</body>
+</html>

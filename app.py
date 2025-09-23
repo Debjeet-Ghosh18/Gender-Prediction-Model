@@ -6,6 +6,7 @@ from sklearn.linear_model import LogisticRegression
 
 # Load dataset
 with open("df.pkl", "rb") as f:
+
     df = pickle.load(f)
 
 # Train model with balancing
