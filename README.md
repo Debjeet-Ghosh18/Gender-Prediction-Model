@@ -5,9 +5,6 @@ The application uses a simple machine learning classification model to predict w
 
 
 Model Training
-
 A classification algorithm is trained (e.g., Logistic Regression, Decision Tree, Random Forest, or SVM).
-
 Features: Height, Weight
-
 Target: Gender
