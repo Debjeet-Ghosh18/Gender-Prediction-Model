@@ -11,11 +11,7 @@ Target: Gender
 
 
 Streamlit App
-
 UI with input fields for height and weight.
-
 User enters values.
-
 App loads the trained model (pickle file).
-
 Model predicts gender → displays result on the screen.
