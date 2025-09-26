@@ -10,8 +10,6 @@ Features: Height, Weight
 Target: Gender
 
 
-
-
 Streamlit App
 UI with input fields for height and weight.
 User enters values.
