@@ -12,7 +12,11 @@ Target: Gender (Male / Female)
 The model learns patterns from the data and predicts gender for new inputs.
 
 
+🛠 Model Training
 
+A machine learning classifier (e.g., Logistic Regression, Decision Tree, Random Forest, or SVM) is trained.
+
+The trained model is saved using Pickle for deployment.
 
 
 
